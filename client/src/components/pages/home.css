@@ -1,0 +1,16 @@
+
+.home_con {
+    padding-top: 170px;
+}
+
+.home {
+    border: 2px solid black;
+    padding: 15px 15px 15px 15px ;
+}
+
+
+.home > h1 {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+}
