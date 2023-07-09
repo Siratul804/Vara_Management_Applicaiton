@@ -1,15 +1,20 @@
 import React, { useState } from "react";
 import { post } from "axios";
 import { useNavigate } from "react-router-dom";
+import "./curd.css";
 
 function CrudAdd(props) {
   const initialState = {
-    companyName: "",
-    phone: "",
-    email: "",
-    location: "",
-    link: "",
+    varaitiyaName: "",
+    floor: "",
+    month: "",
+    flat: "",
+    electricity: "",
+    gas: "",
+    garbage: "",
+    light: "",
     description: "",
+    total: "",
   };
   const [crud, setCrud] = useState(initialState);
 
@@ -20,7 +25,7 @@ function CrudAdd(props) {
     //if (!crud.companyName || !crud.email) return;
     async function postCrud() {
       try {
-        const response = await post("/api/cruds/", crud);
+        const response = await post("http://localhost:8080/api/cruds/", crud);
         navigate(`/cruds/${response.data._id}`);
       } catch (error) {
         console.log("error", error);
@@ -38,67 +43,107 @@ function CrudAdd(props) {
   }
 
   return (
-    <div className="container" style={{ maxWidth: "400px" }}>
-      <h1>Create CRUD</h1>
+    <div className="container pt-3" style={{ maxWidth: "400px" }}>
+      <h1 style={{ fontFamily: "monospace" }}>Create Varaitiya</h1>
       <hr />
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Company Name</label>
-          <input
-            name="companyName"
-            type="text"
-            required
-            value={crud.companyName}
-            onChange={handleChange}
-            className="form-control"
-          />
-        </div>
-        <div className="form-group">
-          <label>Phone</label>
-          <input
-            name="phone"
-            type="tel"
-            required
-            value={crud.phone}
-            onChange={handleChange}
-            className="form-control"
-          />
-          <small>Format: 251-XXX-XXXXXX</small>
-        </div>
-        <div className="form-group">
-          <label>Email</label>
-          <input
-            name="email"
-            type="email"
-            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$"
-            required
-            value={crud.email}
-            onChange={handleChange}
-            className="form-control"
-          />
-        </div>
-        <div className="form-group">
-          <label>Location</label>
-          <input
-            name="location"
-            type="text"
-            required
-            value={crud.location}
-            onChange={handleChange}
-            className="form-control"
-          />
-        </div>
-        <div className="form-group">
-          <label>Website/Social Link</label>
-          <input
-            name="link"
-            type="url"
-            value={crud.link}
-            onChange={handleChange}
-            className="form-control"
-          />
-          <small>Format: https://yourlink.ext</small>
-        </div>
+        <section className="nam_flr">
+          <div className="form-group">
+            <label>Name:</label>
+            <input
+              name="varaitiyaName"
+              type="text"
+              required
+              value={crud.varaitiyaName}
+              onChange={handleChange}
+              className="form-control"
+            />
+          </div>
+          <div className="form-group" style={{ marginLeft: "0.2rem" }}>
+            <label>Floor No :</label>
+            <input
+              name="floor"
+              type="text"
+              required
+              value={crud.floor}
+              onChange={handleChange}
+              className="form-control"
+            />
+          </div>
+        </section>
+        <section className="mon_ren">
+          <div className="form-group">
+            <label>Month:</label>
+            <input
+              name="month"
+              type="text"
+              required
+              value={crud.month}
+              onChange={handleChange}
+              className="form-control"
+            />
+          </div>
+
+          <div className="form-group" style={{ marginLeft: "0.2rem" }}>
+            <label>House Rent :</label>
+            <input
+              name="flat"
+              type="text"
+              required
+              value={crud.flat}
+              onChange={handleChange}
+              className="form-control"
+            />
+          </div>
+        </section>
+        <section className="ele_gas">
+          <div className="form-group">
+            <label>Electricity Bill :</label>
+            <input
+              name="electricity"
+              type="text"
+              required
+              value={crud.electricity}
+              onChange={handleChange}
+              className="form-control"
+            />
+          </div>
+          <div className="form-group" style={{ marginLeft: "0.2rem" }}>
+            <label>Gas Bill :</label>
+            <input
+              name="gas"
+              type="text"
+              required
+              value={crud.gas}
+              onChange={handleChange}
+              className="form-control"
+            />
+          </div>
+        </section>
+        <section className="gar_lig">
+          <div className="form-group">
+            <label>Garbage Bill :</label>
+            <input
+              name="garbage"
+              type="text"
+              required
+              value={crud.garbage}
+              onChange={handleChange}
+              className="form-control"
+            />
+          </div>
+          <div className="form-group" style={{ marginLeft: "0.2rem" }}>
+            <label>Light Bill :</label>
+            <input
+              name="light"
+              type="text"
+              required
+              value={crud.light}
+              onChange={handleChange}
+              className="form-control"
+            />
+          </div>
+        </section>
 
         <div className="form-group">
           <label>Description</label>
@@ -111,12 +156,30 @@ function CrudAdd(props) {
           />
         </div>
 
-        <div className="btn-group">
-          <input type="submit" value="Submit" className="btn btn-primary" />
+        <div className="form-group">
+          <label> Total :</label>
+          <input
+            name="total"
+            type="text"
+            required
+            value={crud.total}
+            onChange={handleChange}
+            className="form-control"
+          />
+        </div>
+
+        <div className="btn-group pt-2 ">
+          <input
+            type="submit"
+            value="Submit"
+            className="btn btn-primary"
+            style={{ borderRadius: "5px" }}
+          />
           <button
             type="button"
             onClick={handleCancel}
             className="btn btn-secondary"
+            style={{ borderRadius: "5px", marginLeft: "0.2rem" }}
           >
             Cancel
           </button>
