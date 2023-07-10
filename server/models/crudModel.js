@@ -34,4 +34,4 @@ const crudSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("vhara", crudSchema);
+module.exports = mongoose.model("vara", crudSchema);

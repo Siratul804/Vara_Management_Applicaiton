@@ -8,12 +8,17 @@ import { createFileName, useScreenshot } from "use-react-screenshot";
 function CrudDetails(props) {
   //scrennshot
   const ref = createRef(null);
-  const [takeScreenshot] = useScreenshot({
+  const [image, takeScreenshot] = useScreenshot({
     type: "image/jpeg",
     quality: 1.0,
   });
 
-  const download = (image, { name = "sampleimg", extension = "jpg" } = {}) => {
+  console.log(image);
+
+  const download = (
+    image,
+    { name = crud.varaitiyaName, extension = "jpg" } = {}
+  ) => {
     const a = document.createElement("a");
     a.href = image;
     a.download = createFileName(extension, name);
