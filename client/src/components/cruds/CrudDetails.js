@@ -1,11 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, { createRef, useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./curd.css";
 
-function CrudDetails(props) {
-  const [crud, setCrud] = useState({});
+import { createFileName, useScreenshot } from "use-react-screenshot";
 
+function CrudDetails(props) {
+  //scrennshot
+  const ref = createRef(null);
+  const [takeScreenshot] = useScreenshot({
+    type: "image/jpeg",
+    quality: 1.0,
+  });
+
+  const download = (image, { name = "sampleimg", extension = "jpg" } = {}) => {
+    const a = document.createElement("a");
+    a.href = image;
+    a.download = createFileName(extension, name);
+    a.click();
+  };
+
+  const getImage = () => takeScreenshot(ref.current).then(download);
+
+  const [crud, setCrud] = useState({});
   const { _id } = useParams();
   const navigate = useNavigate();
 
@@ -38,57 +55,59 @@ function CrudDetails(props) {
 
   return (
     <div className="container curd_details ">
-      <h2 className="text-center py-4 " style={{ fontFamily: "monospace" }}>
-        Details Of {crud.varaitiyaName}
-      </h2>
-      <p>
-        <small>
-          <b>ID</b>: {crud._id}
-        </small>
-      </p>
-      <section className="vara_detail_section">
+      <div className="VaraScreenShot" ref={ref}>
+        <h2 className="text-center py-4 " style={{ fontFamily: "monospace" }}>
+          Details Of {crud.varaitiyaName}
+        </h2>
         <p>
-          <b>Name</b>: {crud.varaitiyaName}
+          <small>
+            <b>ID</b>: {crud._id}
+          </small>
         </p>
+        <section className="vara_detail_section">
+          <p>
+            <b>Name</b>: {crud.varaitiyaName}
+          </p>
 
-        <p>
-          <b>Floor No</b>: {crud.floor}th
-        </p>
-      </section>
-      <section className="vara_detail_section">
-        <p>
-          <b>Month</b>: {crud.month}
-        </p>
-        <p className="text-info">
-          <b>House Rent</b>: {crud.flat} Tk
-        </p>
-      </section>
-      <section className="vara_detail_section">
-        <p>
-          <b>Electricity Bill</b>: {crud.electricity} Tk
-        </p>
-        <p>
-          <b>Gas Bill</b>: {crud.gas} Tk
-        </p>
-      </section>
-      <section className="vara_detail_section">
-        <p>
-          <b>Garbage Bill</b>: {crud.garbage} Tk
-        </p>
-        <p>
-          <b>Stair Bill</b>: {crud.light} Tk
-        </p>
-      </section>
-      <section className="vara_detail_section">
-        <p>
-          <b>Description</b>: <p align="justify">{crud.description}</p>
-        </p>
-      </section>
-      <section className="vara_detail_section">
-        <p className="text-danger">
-          <b>Total</b>: {crud.total} Tk
-        </p>
-      </section>
+          <p>
+            <b>Floor No</b>: {crud.floor}th
+          </p>
+        </section>
+        <section className="vara_detail_section">
+          <p>
+            <b>Month</b>: {crud.month}
+          </p>
+          <p className="text-info">
+            <b>House Rent</b>: {crud.flat} Tk
+          </p>
+        </section>
+        <section className="vara_detail_section">
+          <p>
+            <b>Electricity Bill</b>: {crud.electricity} Tk
+          </p>
+          <p>
+            <b>Gas Bill</b>: {crud.gas} Tk
+          </p>
+        </section>
+        <section className="vara_detail_section">
+          <p>
+            <b>Garbage Bill</b>: {crud.garbage} Tk
+          </p>
+          <p>
+            <b>Stair Bill</b>: {crud.light} Tk
+          </p>
+        </section>
+        <section className="vara_detail_section">
+          <p>
+            <b>Description</b>: <p align="justify">{crud.description}</p>
+          </p>
+        </section>
+        <section className="vara_detail_section">
+          <p className="text-danger">
+            <b>Total</b>: {crud.total} Tk
+          </p>
+        </section>
+      </div>
 
       <hr />
       <div className="btn-group py-4  ">
@@ -102,7 +121,9 @@ function CrudDetails(props) {
         <button onClick={handleDelete} className="btn btn-danger">
           Delete
         </button>
-        <button className="btn btn-primary">Screenshot</button>
+        <button className="btn btn-primary" onClick={getImage}>
+          Screenshot
+        </button>
         <Link to="/cruds" className="btn btn-secondary">
           Close
         </Link>
