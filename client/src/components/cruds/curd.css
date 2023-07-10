@@ -33,3 +33,16 @@
     display: flex;
     justify-content: center;
 }
+
+.varaitiya_search {
+    border: none;
+    font-size: 20px;
+    padding: 10px;
+    background-color: antiquewhite;
+}
+
+.serch_box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}

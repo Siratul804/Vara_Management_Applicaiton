@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 function CrudTable() {
   const [cruds, setCruds] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(function () {
     async function getCruds() {
@@ -28,11 +29,22 @@ function CrudTable() {
             Table View
           </div>
           <hr />
-          <p>
-            <Link to="/cruds/new" className="btn btn-primary float-right">
-              Create CRUD
-            </Link>
-          </p>
+          <div className="serch_box">
+            <p>
+              <Link to="/cruds/new" className="btn btn-primary float-right">
+                Create CRUD
+              </Link>
+            </p>
+            <input
+              type="search"
+              onChange={(event) => {
+                setSearchTerm(event.target.value);
+              }}
+              placeholder="Search Varaitiya"
+              className="varaitiya_search"
+              aria-label="Search"
+            />
+          </div>
         </h2>
         <hr />
       </div>
@@ -51,68 +63,81 @@ function CrudTable() {
           </thead>
           <tbody>
             {cruds &&
-              cruds.map((crud) => {
-                return (
-                  <tr key={crud._id}>
-                    <td>
-                      <Link
-                        to={`/cruds/${crud._id}`}
-                        className="link-line"
+              cruds
+                .filter((val) => {
+                  if (searchTerm === "") {
+                    return val;
+                  } else if (
+                    val.varaitiyaName
+                      .toLowerCase()
+                      .includes(searchTerm.toLocaleLowerCase())
+                  ) {
+                    return val;
+                  }
+                  return false;
+                })
+                .map((crud) => {
+                  return (
+                    <tr key={crud._id}>
+                      <td>
+                        <Link
+                          to={`/cruds/${crud._id}`}
+                          className="link-line"
+                          style={{
+                            fontWeight: "bold",
+                            fontFamily: "sans-serif",
+                            color: "red",
+                          }}
+                        >
+                          {crud.varaitiyaName}
+                        </Link>
+                      </td>
+                      <td
                         style={{
                           fontWeight: "bold",
                           fontFamily: "sans-serif",
-                          color: "red",
+                          color: "blue",
                         }}
                       >
-                        {crud.varaitiyaName}
-                      </Link>
-                    </td>
-                    <td
-                      style={{
-                        fontWeight: "bold",
-                        fontFamily: "sans-serif",
-                        color: "blue",
-                      }}
-                    >
-                      {crud.floor}th
-                    </td>
-                    <td
-                      style={{
-                        fontWeight: "bold",
-                        fontFamily: "sans-serif",
-                        color: "gray",
-                      }}
-                    >
-                      {crud.month}
-                    </td>
+                        {crud.floor}th
+                      </td>
+                      <td
+                        style={{
+                          fontWeight: "bold",
+                          fontFamily: "sans-serif",
+                          color: "gray",
+                        }}
+                      >
+                        {crud.month}
+                      </td>
 
-                    <td>
-                      <Link
-                        to={`/cruds/${crud._id}`}
-                        className="btn btn-warning"
-                      >
-                        View
-                      </Link>
-                    </td>
-                    <td>
-                      <Link
-                        to={`/cruds/${crud._id}/edit`}
-                        className="btn btn-success"
-                      >
-                        Edit
-                      </Link>
-                    </td>
-                    <td>
-                      <Link
-                        to={`/cruds/${crud._id}/delete`}
-                        className="btn btn-danger"
-                      >
-                        Delete
-                      </Link>
-                    </td>
-                  </tr>
-                );
-              })}
+                      <td>
+                        <Link
+                          to={`/cruds/${crud._id}`}
+                          className="btn btn-warning"
+                        >
+                          View
+                        </Link>
+                      </td>
+                      <td>
+                        <Link
+                          to={`/cruds/${crud._id}/edit`}
+                          className="btn btn-success"
+                        >
+                          Edit
+                        </Link>
+                      </td>
+                      <td>
+                        <Link
+                          to={`/cruds/${crud._id}/delete`}
+                          className="btn btn-danger"
+                        >
+                          Delete
+                        </Link>
+                      </td>
+                    </tr>
+                  );
+                })}
           </tbody>
         </table>
       </div>
