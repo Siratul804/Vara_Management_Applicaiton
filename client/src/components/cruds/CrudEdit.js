@@ -3,144 +3,207 @@ import { get, patch } from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
 function CrudEdit(props) {
-	const initialState = {
-		companyName: "",
-		phone: "",
-		email: "",
-		location: "",
-		link: "",
-		description: "",
-	};
-	const [crud, setCrud] = useState(initialState);
+  const initialState = {
+    varaitiyaName: "",
+    floor: "",
+    month: "",
+    flat: "",
+    electricity: "",
+    gas: "",
+    garbage: "",
+    light: "",
+    description: "",
+    total: "",
+  };
+  const [crud, setCrud] = useState(initialState);
 
-	const { _id } = useParams();
-	const navigate = useNavigate();
+  const { _id } = useParams();
+  const navigate = useNavigate();
 
-	useEffect(
-		function () {
-			async function updateCrud() {
-				try {
-					const response = await get(`/api/cruds/${_id}`);
-					setCrud(response.data);
-				} catch (error) {
-					console.log(error);
-				}
-			}
-			updateCrud();
-		},
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[props]
-	);
+  useEffect(
+    function () {
+      async function updateCrud() {
+        try {
+          const response = await get(`http://localhost:8080/api/cruds/${_id}`);
+          setCrud(response.data);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      updateCrud();
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [props]
+  );
 
-	function handleSubmit(event) {
-		event.preventDefault();
-		async function updateCrud() {
-			try {
-				await patch(`/api/cruds/${crud._id}`, crud);
-				navigate(`/cruds/${crud._id}`);
-			} catch (error) {
-				console.log(error);
-			}
-		}
-		updateCrud();
-	}
+  function handleSubmit(event) {
+    event.preventDefault();
+    async function updateCrud() {
+      try {
+        await patch(`http://localhost:8080/api/cruds/${crud._id}`, crud);
+        navigate(`/cruds/${crud._id}`);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    updateCrud();
+  }
 
-	function handleChange(event) {
-		setCrud({ ...crud, [event.target.name]: event.target.value });
-	}
+  function handleChange(event) {
+    setCrud({ ...crud, [event.target.name]: event.target.value });
+  }
 
-	function handleCancel() {
-		navigate(`/cruds/${crud._id}`);
-	}
+  function handleCancel() {
+    navigate(`/cruds/${crud._id}`);
+  }
 
-	return (
-		<div className="container">
-			<h1>Edit {crud.companyName}</h1>
-			<hr />
-			<form onSubmit={handleSubmit}>
-				<div className="form-group">
-					<label>Company Name</label>
-					<input
-						name="companyName"
-						type="text"
-						value={crud.companyName}
-						onChange={handleChange}
-						className="form-control"
-					/>
-				</div>
-				<div className="form-group">
-					<label>Phone</label>
-					<input
-						name="phone"
-						type="tel"
-						pattern="(251)-[0-9]{3}-[0-9]{6}"
-						required
-						value={crud.phone}
-						onChange={handleChange}
-						className="form-control"
-					/>
-					<small>Format: 251-XXX-XXXXXX</small>
-				</div>
-				<div className="form-group">
-					<label>Email</label>
-					<input
-						name="email"
-						type="email"
-						pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$"
-						required
-						value={crud.email}
-						onChange={handleChange}
-						className="form-control"
-					/>
-				</div>
-				<div className="form-group">
-					<label>Location</label>
-					<input
-						name="location"
-						type="text"
-						required
-						value={crud.location}
-						onChange={handleChange}
-						className="form-control"
-					/>
-				</div>
-				<div className="form-group">
-					<label>Website/Social Link</label>
-					<input
-						name="link"
-						type="url"
-						value={crud.link}
-						onChange={handleChange}
-						className="form-control"
-					/>
-					<small>Format: https://yourlink.ext</small>
-				</div>
+  return (
+    <div className="container">
+      <h1 style={{ fontFamily: "monospace" }} className=" py-2  ">
+        Edit Varaitiya
+        <div style={{ borderBottom: "2px solid black", width: "310px" }}></div>
+      </h1>
+      <div className="edit">
+        <form onSubmit={handleSubmit}>
+          <section className="nam_flr">
+            <div className="form-group">
+              <label>Name:</label>
+              <input
+                name="varaitiyaName"
+                type="text"
+                required
+                value={crud.varaitiyaName}
+                onChange={handleChange}
+                className="form-control"
+              />
+            </div>
+            <div className="form-group" style={{ marginLeft: "0.2rem" }}>
+              <label>Floor No :</label>
+              <input
+                name="floor"
+                type="text"
+                required
+                value={crud.floor}
+                onChange={handleChange}
+                className="form-control"
+              />
+            </div>
+          </section>
+          <section className="mon_ren">
+            <div className="form-group">
+              <label>Month:</label>
+              <input
+                name="month"
+                type="text"
+                required
+                value={crud.month}
+                onChange={handleChange}
+                className="form-control"
+              />
+            </div>
 
-				<div className="form-group">
-					<label>Description</label>
-					<textarea
-						name="description"
-						row="5"
-						value={crud.description}
-						onChange={handleChange}
-						className="form-control"
-					/>
-				</div>
-				<div className="btn-group">
-					<button type="submit" className="btn btn-primary">
-						Update
-					</button>
-					<button
-						type="button"
-						onClick={handleCancel}
-						className="btn btn-secondary"
-					>
-						Cancel
-					</button>
-				</div>
-			</form>
-		</div>
-	);
+            <div className="form-group" style={{ marginLeft: "0.2rem" }}>
+              <label>House Rent :</label>
+              <input
+                name="flat"
+                type="text"
+                required
+                value={crud.flat}
+                onChange={handleChange}
+                className="form-control"
+              />
+            </div>
+          </section>
+          <section className="ele_gas">
+            <div className="form-group">
+              <label>Electricity Bill :</label>
+              <input
+                name="electricity"
+                type="text"
+                required
+                value={crud.electricity}
+                onChange={handleChange}
+                className="form-control"
+              />
+            </div>
+            <div className="form-group" style={{ marginLeft: "0.2rem" }}>
+              <label>Gas Bill :</label>
+              <input
+                name="gas"
+                type="text"
+                required
+                value={crud.gas}
+                onChange={handleChange}
+                className="form-control"
+              />
+            </div>
+          </section>
+          <section className="gar_lig">
+            <div className="form-group">
+              <label>Garbage Bill :</label>
+              <input
+                name="garbage"
+                type="text"
+                required
+                value={crud.garbage}
+                onChange={handleChange}
+                className="form-control"
+              />
+            </div>
+            <div className="form-group" style={{ marginLeft: "0.2rem" }}>
+              <label>Stair Bill :</label>
+              <input
+                name="light"
+                type="text"
+                required
+                value={crud.light}
+                onChange={handleChange}
+                className="form-control"
+              />
+            </div>
+          </section>
+
+          <section className="des_to">
+            <div className="form-group">
+              <label>Description</label>
+              <textarea
+                name="description"
+                row="10"
+                value={crud.description}
+                onChange={handleChange}
+                className="form-control"
+              />
+            </div>
+
+            <div className="form-group" style={{ marginLeft: "1.2rem" }}>
+              <label> Total :</label>
+              <input
+                name="total"
+                type="text"
+                required
+                value={crud.total}
+                onChange={handleChange}
+                className="form-control"
+              />
+            </div>
+          </section>
+
+          <div className="btn-group pt-4 ">
+            <button type="submit" className="btn btn-primary">
+              Update
+            </button>
+            <button
+              type="button"
+              onClick={handleCancel}
+              className="btn btn-secondary"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
 }
 
 export default CrudEdit;

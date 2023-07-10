@@ -21,7 +21,13 @@ function CrudTable() {
     <div className="container">
       <div>
         <h2>
-          CRUD - Table View
+          <div
+            className="text-center pt-4"
+            style={{ fontWeight: "bold", fontFamily: "sans-serif" }}
+          >
+            Table View
+          </div>
+          <hr />
           <p>
             <Link to="/cruds/new" className="btn btn-primary float-right">
               Create CRUD
@@ -49,12 +55,36 @@ function CrudTable() {
                 return (
                   <tr key={crud._id}>
                     <td>
-                      <Link to={`/cruds/${crud._id}`} className="link-line">
+                      <Link
+                        to={`/cruds/${crud._id}`}
+                        className="link-line"
+                        style={{
+                          fontWeight: "bold",
+                          fontFamily: "sans-serif",
+                          color: "red",
+                        }}
+                      >
                         {crud.varaitiyaName}
                       </Link>
                     </td>
-                    <td>{crud.floor}</td>
-                    <td>{crud.month}</td>
+                    <td
+                      style={{
+                        fontWeight: "bold",
+                        fontFamily: "sans-serif",
+                        color: "blue",
+                      }}
+                    >
+                      {crud.floor}th
+                    </td>
+                    <td
+                      style={{
+                        fontWeight: "bold",
+                        fontFamily: "sans-serif",
+                        color: "gray",
+                      }}
+                    >
+                      {crud.month}
+                    </td>
 
                     <td>
                       <Link

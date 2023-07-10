@@ -14,3 +14,22 @@
     display: flex;
    
 }
+
+.curd_details {
+
+}
+
+.vara_detail_section {
+    display: flex;
+    justify-content: space-evenly;
+   
+}
+
+.des_to {
+    display: flex;
+}
+
+.edit {
+    display: flex;
+    justify-content: center;
+}

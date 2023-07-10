@@ -133,7 +133,7 @@ function CrudAdd(props) {
             />
           </div>
           <div className="form-group" style={{ marginLeft: "0.2rem" }}>
-            <label>Light Bill :</label>
+            <label>Stair Bill :</label>
             <input
               name="light"
               type="text"
