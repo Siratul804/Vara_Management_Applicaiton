@@ -20,6 +20,12 @@ function CrudEdit(props) {
   const { _id } = useParams();
   const navigate = useNavigate();
 
+  const a = Math.floor(crud.flat);
+  const b = Math.floor(crud.electricity);
+  const d = Math.floor(crud.gas);
+  const c = Math.floor(crud.garbage);
+  const e = Math.floor(crud.light);
+
   useEffect(
     function () {
       async function updateCrud() {
@@ -176,7 +182,7 @@ function CrudEdit(props) {
             </div>
 
             <div className="form-group" style={{ marginLeft: "1.2rem" }}>
-              <label> Total :</label>
+              <label> Total : {a + b + c + d + e} </label>
               <input
                 name="total"
                 type="text"

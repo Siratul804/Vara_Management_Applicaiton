@@ -25,7 +25,7 @@ function CrudGridView() {
           className="text-center pt-4"
           style={{ fontWeight: "bold", fontFamily: "sans-serif" }}
         >
-          Table View
+          Grid View
         </div>
         <hr />
         <div className="serch_box">
