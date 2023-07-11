@@ -42,6 +42,12 @@ function CrudAdd(props) {
     navigate("/cruds");
   }
 
+  const a = Math.floor(crud.flat);
+  const b = Math.floor(crud.electricity);
+  const d = Math.floor(crud.gas);
+  const c = Math.floor(crud.garbage);
+  const e = Math.floor(crud.light);
+
   return (
     <div className="container pt-3" style={{ maxWidth: "400px" }}>
       <h1 style={{ fontFamily: "monospace" }}>Create Varaitiya</h1>
@@ -157,7 +163,7 @@ function CrudAdd(props) {
         </div>
 
         <div className="form-group">
-          <label> Total :</label>
+          <label> Total : {a + b + c + d + e} </label>
           <input
             name="total"
             type="text"
