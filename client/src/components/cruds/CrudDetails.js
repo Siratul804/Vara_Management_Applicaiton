@@ -101,6 +101,9 @@ function CrudDetails(props) {
           <p>
             <b>Stair Bill</b>: {crud.light} Tk
           </p>
+          <p>
+            <b>Water Bill</b>: {crud.water} Tk
+          </p>
         </section>
         <section className="vara_detail_section">
           <p>

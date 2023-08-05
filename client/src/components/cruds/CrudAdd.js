@@ -13,6 +13,7 @@ function CrudAdd(props) {
     gas: "",
     garbage: "",
     light: "",
+    water: "",
     description: "",
     total: "",
   };
@@ -47,6 +48,7 @@ function CrudAdd(props) {
   const d = Math.floor(crud.gas);
   const c = Math.floor(crud.garbage);
   const e = Math.floor(crud.light);
+  const f = Math.floor(crud.water);
 
   return (
     <div className="container pt-3" style={{ maxWidth: "400px" }}>
@@ -149,6 +151,17 @@ function CrudAdd(props) {
               className="form-control"
             />
           </div>
+          <div className="form-group" style={{ marginLeft: "0.2rem" }}>
+            <label>Water Bill :</label>
+            <input
+              name="water"
+              type="text"
+              required
+              value={crud.water}
+              onChange={handleChange}
+              className="form-control"
+            />
+          </div>
         </section>
 
         <div className="form-group">
@@ -163,7 +176,7 @@ function CrudAdd(props) {
         </div>
 
         <div className="form-group">
-          <label> Total : {a + b + c + d + e} </label>
+          <label> Total : {a + b + c + d + e + f} </label>
           <input
             name="total"
             type="text"

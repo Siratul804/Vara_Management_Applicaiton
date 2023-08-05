@@ -25,6 +25,9 @@ const crudSchema = new mongoose.Schema({
   light: {
     type: String,
   },
+  water: {
+    type: String,
+  },
 
   description: {
     type: String,

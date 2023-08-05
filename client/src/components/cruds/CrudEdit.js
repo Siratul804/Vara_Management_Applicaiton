@@ -12,6 +12,7 @@ function CrudEdit(props) {
     gas: "",
     garbage: "",
     light: "",
+    water: "",
     description: "",
     total: "",
   };
@@ -25,6 +26,7 @@ function CrudEdit(props) {
   const d = Math.floor(crud.gas);
   const c = Math.floor(crud.garbage);
   const e = Math.floor(crud.light);
+  const f = Math.floor(crud.water);
 
   useEffect(
     function () {
@@ -168,6 +170,17 @@ function CrudEdit(props) {
               />
             </div>
           </section>
+          <div className="form-group" style={{ marginLeft: "0.2rem" }}>
+            <label>Water Bill :</label>
+            <input
+              name="light"
+              type="text"
+              required
+              value={crud.water}
+              onChange={handleChange}
+              className="form-control"
+            />
+          </div>
 
           <section className="des_to">
             <div className="form-group">
@@ -182,7 +195,7 @@ function CrudEdit(props) {
             </div>
 
             <div className="form-group" style={{ marginLeft: "1.2rem" }}>
-              <label> Total : {a + b + c + d + e} </label>
+              <label> Total : {a + b + c + d + e + f} </label>
               <input
                 name="total"
                 type="text"
